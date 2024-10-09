@@ -3,9 +3,11 @@ package hello.hello_spring.repository;
 import hello.hello_spring.domain.Member;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.*;
 
-@Repository
+
 public class MemoryMemberRepository implements  MemberRepository{
     private static Map<Long, Member> store = new HashMap<>();
     private static long sequence = 0L;
@@ -13,6 +15,7 @@ public class MemoryMemberRepository implements  MemberRepository{
 
     @Override
     public Member save(Member member) {
+
         member.setId(++sequence);
         store.put(member.getId(), member);
         return member;
